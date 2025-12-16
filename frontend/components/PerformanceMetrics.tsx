@@ -44,7 +44,7 @@ export default function PerformanceMetrics() {
   }, []);
 
   const getPerformanceRating = (value: number | null, type: 'lcp' | 'fcp' | 'cls' | 'ttfb') => {
-    if (value === null) return 'Calculating...';
+    if (value === null) return { rating: 'Calculating...', color: 'text-muted-foreground' };
 
     switch (type) {
       case 'lcp':
@@ -58,7 +58,7 @@ export default function PerformanceMetrics() {
         if (value < 0.25) return { rating: 'Good', color: 'text-yellow-500' };
         return { rating: 'Needs Improvement', color: 'text-red-500' };
       default:
-        return 'N/A';
+        return { rating: 'N/A', color: 'text-muted-foreground' };
     }
   };
 
@@ -80,7 +80,7 @@ export default function PerformanceMetrics() {
       className="fixed bottom-4 right-4 bg-card p-4 rounded-lg shadow-lg z-50 max-w-xs border border-border"
     >
       <h3 className="font-black text-foreground mb-3 text-center">Performance Metrics</h3>
-      
+
       <div className="space-y-2">
         <div className="flex justify-between">
           <span className="text-muted-foreground">LCP:</span>
@@ -88,21 +88,21 @@ export default function PerformanceMetrics() {
             {metrics.lcp?.toFixed(2)}s
           </span>
         </div>
-        
+
         <div className="flex justify-between">
           <span className="text-muted-foreground">FCP:</span>
           <span className={`${getPerformanceRating(metrics.fcp, 'fcp')?.color || ''} font-bold`}>
             {metrics.fcp?.toFixed(2)}s
           </span>
         </div>
-        
+
         <div className="flex justify-between">
           <span className="text-muted-foreground">CLS:</span>
           <span className={`${getPerformanceRating(metrics.cls, 'cls')?.color || ''} font-bold`}>
             {metrics.cls?.toFixed(3)}
           </span>
         </div>
-        
+
         <div className="flex justify-between">
           <span className="text-muted-foreground">TTFB:</span>
           <span className={`${getPerformanceRating(metrics.ttfb, 'ttfb')?.color || ''} font-bold`}>
@@ -110,11 +110,11 @@ export default function PerformanceMetrics() {
           </span>
         </div>
       </div>
-      
+
       <div className="mt-3 pt-3 border-t border-border">
         <div className="text-xs text-muted-foreground text-center">
-          {metrics.lcp && metrics.fcp && metrics.cls && metrics.ttfb 
-            ? "Performance: Optimal" 
+          {metrics.lcp && metrics.fcp && metrics.cls && metrics.ttfb
+            ? "Performance: Optimal"
             : "Performance: Loading"}
         </div>
       </div>
