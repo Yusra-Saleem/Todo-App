@@ -1,0 +1,208 @@
+# API Contract: Task Management Endpoints
+
+## Endpoint 1: Delete Task
+
+### DELETE /api/tasks/{id}
+
+#### Description
+Deletes a task belonging to the authenticated user. Enforces ownership verification by checking that the authenticated user ID matches the task's user_id.
+
+#### Authentication
+- JWT Bearer token required in Authorization header
+- Uses get_current_user_id dependency for authentication
+- Returns 401 Unauthorized for invalid or missing tokens
+- Returns 403 Forbidden if the task does not belong to the authenticated user
+
+##### Headers
+```
+Authorization: Bearer {jwt_token}
+```
+
+##### Path Parameters
+- `id`: Required, string (UUID format) - The primary key of the task to delete
+
+##### Query Parameters
+- None
+
+##### Request Body
+- None
+
+#### Response
+
+##### Success Response (204 No Content)
+```
+Status: 204 No Content
+Body: (empty)
+```
+
+##### Error Responses
+
+###### 401 Unauthorized
+```json
+{
+  "detail": "Could not validate credentials"
+}
+```
+
+###### 403 Forbidden
+```json
+{
+  "detail": "You do not have permission to delete this task"
+}
+```
+
+###### 404 Not Found
+```json
+{
+  "detail": "Task not found"
+}
+```
+
+## Endpoint 2: Toggle Task Completion
+
+### PATCH /api/tasks/{id}/complete
+
+#### Description
+Toggles the completion status of a task belonging to the authenticated user. Enforces ownership verification by checking that the authenticated user ID matches the task's user_id. The endpoint flips the current value of the `completed` field.
+
+#### Authentication
+- JWT Bearer token required in Authorization header
+- Uses get_current_user_id dependency for authentication
+- Returns 401 Unauthorized for invalid or missing tokens
+- Returns 403 Forbidden if the task does not belong to the authenticated user
+
+##### Headers
+```
+Authorization: Bearer {jwt_token}
+Content-Type: application/json
+```
+
+##### Path Parameters
+- `id`: Required, string (UUID format) - The primary key of the task to update
+
+##### Query Parameters
+- None
+
+##### Request Body
+```json
+{
+  "is_completed": "boolean (optional - if not provided, simply toggle the current value)"
+}
+```
+
+#### Response
+
+##### Success Response (200 OK)
+```json
+{
+  "id": "string (UUID)",
+  "title": "string (max 255)",
+  "is_completed": "boolean",
+  "created_at": "string (ISO 8601 datetime)",
+  "updated_at": "string (ISO 8601 datetime)",
+  "user_id": "string (UUID)"
+}
+```
+
+##### Error Responses
+
+###### 401 Unauthorized
+```json
+{
+  "detail": "Could not validate credentials"
+}
+```
+
+###### 403 Forbidden
+```json
+{
+  "detail": "You do not have permission to update this task"
+}
+```
+
+###### 404 Not Found
+```json
+{
+  "detail": "Task not found"
+}
+```
+
+###### 422 Validation Error
+```json
+{
+  "detail": [
+    {
+      "loc": ["body", "is_completed"],
+      "msg": "value is not a valid boolean",
+      "type": "type_error"
+    }
+  ]
+}
+```
+
+## Implementation Notes
+
+### Common Validation Logic
+- Both endpoints must verify that the id path parameter is a valid UUID format
+- Both endpoints must use a single database query that verifies both the task ID and the authenticated user ID to ensure ownership
+- Both endpoints must ensure that the user can only operate on their own tasks
+
+### Task Deletion Implementation
+- Verify authentication and ownership in a single database query
+- Delete the task record if verification passes
+- Return 204 No Content status
+
+### Task Completion Toggle Implementation
+- Verify authentication and ownership in a single database query
+- Toggle the value of the `completed` field (true to false or false to true)
+- Update the `updated_at` timestamp
+- Return the updated Task object serialized using the TaskRead response model
+
+## Example Requests
+
+### Delete Task:
+```
+DELETE /api/tasks/a1b2c3d4-e5f6-7890-1234-567890abcdef
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+### Toggle Task Completion:
+```
+PATCH /api/tasks/a1b2c3d4-e5f6-7890-1234-567890abcdef/complete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+{
+  "is_completed": true
+}
+```
+
+Or to just toggle the current value without specifying:
+```
+PATCH /api/tasks/a1b2c3d4-e5f6-7890-1234-567890abcdef/complete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+{}
+```
+
+## Example Responses
+
+### Successful Deletion:
+```
+Status: 204 No Content
+Body: (empty)
+```
+
+### Successful Toggle:
+```
+Status: 200 OK
+{
+  "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+  "title": "Complete the project documentation",
+  "is_completed": true,
+  "created_at": "2023-10-15T14:30:00Z",
+  "updated_at": "2023-10-16T09:15:00Z",
+  "user_id": "user123-4567-8901-abcdef123456"
+}
+```

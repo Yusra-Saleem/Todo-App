@@ -1,4 +1,4 @@
-# Qwen Code Rules
+﻿# Qwen Code Rules
 
 This file is generated during init for the selected agent.
 
@@ -208,3 +208,44 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Recent Changes
+- 009-ui-ux-refinement: Added Next.js + Tailwind CSS + Lucide React + CSS Variables for dark mode implementation with mobile-first responsive design
+- 004-secure-task-dashboard: Added [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION] + [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]
+- 005-secure-task-dashboard: Added Python 3.11 + FastAPI + SQLModel + Next.js + Better Auth + Neon DB
+- 006-secure-task-retrieval-and-professional-dashboard-display: Added Python 3.11 + FastAPI + SQLModel + Pydantic + Next.js + React + TypeScript + Tailwind CSS + shadcn/ui + PostgreSQL (Neon DB) for secure task listing API and professional dashboard UI
+- 007-secure-task-update: Added Python 3.11 + FastAPI + SQLModel + Pydantic + Next.js + React + TypeScript + React Hook Form + Tailwind CSS + shadcn/ui + PostgreSQL (Neon DB) for secure task update API and professional editing modal
+- 008-secure-task-delete-toggle: Added Python 3.11 + FastAPI + SQLModel + Pydantic + Next.js + React + TypeScript + React Hook Form + Tailwind CSS + shadcn/ui + PostgreSQL (Neon DB) for secure task deletion and completion toggle API with professional UI controls
+
+# Environment Variable Setup
+
+This project requires the following environment variables to be set:
+
+## Authentication
+- `BETTER_AUTH_SECRET`: The shared secret key used for signing and verifying JWT tokens between frontend and backend.
+
+For local development, create a `.env.local` file in the frontend directory with the following content:
+
+```env
+BETTER_AUTH_SECRET=your-super-secret-key-here
+```
+
+> **IMPORTANT**: Use a strong, random secret key in production. For local development, you can generate a key using:
+> `openssl rand -base64 32`
+
+## Database
+- `DATABASE_URL`: The connection string for the Neon Serverless PostgreSQL database.
+
+For local development, this might look like:
+```env
+DATABASE_URL=postgresql://username:password@localhost/dbname
+```
+
+## Environment Configuration
+- `ENVIRONMENT`: Specify the environment (development, staging, production).
+
+## Security Best Practices
+1. Never commit actual secret values to version control
+2. Use different secrets for different environments
+3. Rotate secrets regularly
+4. Restrict access to secret values in production environments

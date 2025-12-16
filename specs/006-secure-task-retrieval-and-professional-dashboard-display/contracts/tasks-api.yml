@@ -1,0 +1,131 @@
+# API Contract: GET /api/tasks
+
+## Endpoint Definition
+
+```
+GET /api/tasks
+```
+
+### Description
+Retrieves all tasks belonging exclusively to the authenticated user, sorted by creation date (newest first).
+
+### Authentication
+- JWT Bearer token required in Authorization header
+- Uses get_current_user_id dependency for authentication
+- Returns 401 Unauthorized for invalid or missing tokens
+
+## Request
+
+### Headers
+```
+Authorization: Bearer {jwt_token}
+Content-Type: application/json
+```
+
+### Path Parameters
+- None
+
+### Query Parameters
+- `page`: Optional, integer, default: 1 - Page number for pagination
+- `limit`: Optional, integer, default: 50, max: 100 - Number of tasks per page
+
+### Request Body
+- None
+
+## Response
+
+### Success Response (200 OK)
+```json
+{
+  "data": [
+    {
+      "id": "string (UUID)",
+      "title": "string (max 255)",
+      "is_completed": "boolean",
+      "created_at": "string (ISO 8601 datetime)",
+      "updated_at": "string (ISO 8601 datetime)",
+      "user_id": "string (UUID)"
+    }
+  ],
+  "pagination": {
+    "page": "integer",
+    "limit": "integer",
+    "total": "integer",
+    "pages": "integer"
+  }
+}
+```
+
+### Error Responses
+
+#### 401 Unauthorized
+```json
+{
+  "detail": "Could not validate credentials"
+}
+```
+
+#### 422 Validation Error
+```json
+{
+  "detail": [
+    {
+      "loc": ["query", "page"],
+      "msg": "value is not a valid integer",
+      "type": "type_error"
+    }
+  ]
+}
+```
+
+## Business Logic
+
+1. Authenticates user using JWT token
+2. Filters tasks to only those belonging to the authenticated user (Task.user_id == authenticated_user_id)
+3. Sorts tasks by created_at in descending order (newest first)
+4. Implements pagination (default: 50 items per page)
+5. Returns TaskRead objects with specified fields
+
+## Validation Rules
+
+- Page parameter must be a positive integer
+- Limit parameter must be between 1 and 100
+- User can only access their own tasks (enforced by database query)
+- Response fields match TaskRead Pydantic schema
+
+## Example Request
+```
+GET /api/tasks?page=1&limit=50
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+## Example Response
+```
+Status: 200 OK
+{
+  "data": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "title": "Complete project documentation",
+      "is_completed": false,
+      "created_at": "2023-10-15T14:30:00Z",
+      "updated_at": "2023-10-15T14:30:00Z",
+      "user_id": "user123-4567-8901-abcdef123456"
+    },
+    {
+      "id": "b2c3d4e5-f6g7-8901-2345-67890abcdef1",
+      "title": "Review code changes",
+      "is_completed": true,
+      "created_at": "2023-10-14T09:15:00Z",
+      "updated_at": "2023-10-14T18:45:00Z",
+      "user_id": "user123-4567-8901-abcdef123456"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 50,
+    "total": 2,
+    "pages": 1
+  }
+}
+```
