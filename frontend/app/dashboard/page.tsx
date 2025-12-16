@@ -127,7 +127,7 @@ function DashboardContent() {
       />
 
       {/* Main Content Area */}
-      <main className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? 'md:ml-20' : 'md:ml-72'} relative z-10`}>
+      <main className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? 'md:ml-20' : 'md:ml-64'} relative z-10`}>
         {/* Dashboard Header */}
         <DashboardHeader onMenuClick={() => setMobileMenuOpen(true)} />
 

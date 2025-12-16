@@ -152,8 +152,7 @@ export default function DashboardSidebar({
       </AnimatePresence>
 
       {/* Desktop Sidebar */}
-      <aside className={`bg-gradient-to-b from-white to-slate-50/50 border-r border-slate-100 h-screen top-0 fixed z-40 transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-72'
-        } hidden md:block shadow-xl shadow-slate-200/30`}>
+      <aside className={`bg-gradient-to-b from-white to-slate-50/50 border-r border-slate-100 h-screen top-0 fixed z-40 transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'} hidden md:block shadow-xl shadow-slate-200/30`}>
         <div className="h-full flex flex-col">
           {/* Brand Header */}
           <div className="p-5 border-b border-slate-100 bg-gradient-to-r from-white via-white to-rose-50/30">
@@ -165,12 +164,12 @@ export default function DashboardSidebar({
                     <motion.div
                       whileHover={{ rotate: 10, scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-900 via-rose-700 to-rose-500 flex items-center justify-center shadow-lg shadow-rose-900/20 group-hover:shadow-rose-900/40 transition-all duration-300"
+                      className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-900 via-rose-700 to-rose-500 flex items-center justify-center shadow-lg shadow-rose-900/20 group-hover:shadow-rose-900/40 transition-all duration-300"
                     >
-                      <CheckSquare className="w-6 h-6 text-white" />
+                      <CheckSquare className="w-5 h-5 text-white" />
                     </motion.div>
                     <div className="hidden md:block">
-                      <h1 className="text-2xl font-black bg-gradient-to-r from-rose-950 via-rose-800 to-rose-600 bg-clip-text text-transparent tracking-tight font-serif">
+                      <h1 className="text-xl font-black bg-gradient-to-r from-rose-950 via-rose-800 to-rose-600 bg-clip-text text-transparent tracking-tight font-serif">
                         TaskZen
                       </h1>
                       <div className="flex items-center gap-1.5">
@@ -218,7 +217,7 @@ export default function DashboardSidebar({
                       <Link href={item.href}>
                         <Button
                           variant="ghost"
-                          className={`w-full justify-start rounded-xl mb-1 h-12 relative overflow-hidden group ${isActive
+                          className={`w-full justify-start rounded-xl mb-1 h-10 relative overflow-hidden group ${isActive
                             ? 'bg-gradient-to-r from-rose-50 to-pink-50 text-rose-700 border-l-4 border-rose-500 shadow-sm shadow-rose-900/5'
                             : 'text-slate-600 hover:text-rose-700 hover:bg-gradient-to-r hover:from-rose-50/50 hover:to-pink-50/50'
                             }`}
@@ -228,7 +227,7 @@ export default function DashboardSidebar({
                               {item.icon}
                             </span>
                             {!isCollapsed && (
-                              <span className="ml-3 font-medium">{item.title}</span>
+                              <span className="ml-3 font-medium text-sm">{item.title}</span>
                             )}
                           </div>
                           {item.badge && !isCollapsed && (
