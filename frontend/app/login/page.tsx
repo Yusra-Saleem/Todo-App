@@ -65,13 +65,13 @@ function LoginPageContent() {
               transition={{ type: "spring", stiffness: 300 }}
               className="flex items-center justify-center gap-3 mb-6"
             >
-                            <motion.div
-                              whileHover={{ rotate: 10, scale: 1.1 }}
-                              whileTap={{ scale: 0.95 }}
-                              className="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-900 via-rose-700 to-rose-500 flex items-center justify-center shadow-lg shadow-rose-900/20 group-hover:shadow-rose-900/40 transition-all duration-300"
-                            >
-                              <CheckSquare className="w-6 h-6 text-white" />
-                            </motion.div>
+              <motion.div
+                whileHover={{ rotate: 10, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-900 via-rose-700 to-rose-500 flex items-center justify-center shadow-lg shadow-rose-900/20 group-hover:shadow-rose-900/40 transition-all duration-300"
+              >
+                <CheckSquare className="w-6 h-6 text-white" />
+              </motion.div>
               {/* <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-900 to-rose-600 flex items-center justify-center shadow-lg shadow-rose-900/20 p-2.5">
                 <img src="/taskzen-logo.png" alt="TaskZen" className="w-full h-full object-contain" />
               </div> */}
@@ -159,8 +159,6 @@ function LoginPageContent() {
 
 export default function LoginPage() {
   return (
-    <AuthProvider>
-      <LoginPageContent />
-    </AuthProvider>
+    <LoginPageContent />
   );
 }
