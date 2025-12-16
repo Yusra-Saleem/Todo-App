@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
 import RegisterForm from '@/components/RegisterForm';
+import { makeApiRequest } from '@/utils/api';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Sparkles, CheckSquare, Rocket, Users, Shield, ArrowRight } from 'lucide-react';
@@ -17,7 +18,7 @@ function RegisterPageContent() {
 
   const handleRegister = async (email: string, password: string) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/auth/register', {
+      const response = await makeApiRequest('/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ function RegisterPageContent() {
         {/* Gradient Overlays */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-rose-200/30 via-pink-200/20 to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-rose-100/20 via-pink-100/15 to-transparent rounded-full blur-3xl" />
-        
+
         {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8813370a_1px,transparent_1px),linear-gradient(to_bottom,#8813370a_1px,transparent_1px)] bg-[size:64px_64px] opacity-30" />
       </div>
@@ -160,15 +161,15 @@ function RegisterPageContent() {
         >
           <p className="text-slate-600 text-sm mb-4">
             Already have an account?{' '}
-            <Link 
-              href="/login" 
+            <Link
+              href="/login"
               className="font-bold text-rose-700 hover:text-rose-900 inline-flex items-center gap-1 group"
             >
               Sign in here
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </Link>
           </p>
-          
+
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-50 to-white rounded-full border border-slate-200">
             <Sparkles className="w-3 h-3 text-amber-500" />
             <span className="text-xs text-slate-500">No credit card required • Cancel anytime</span>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useContext, createContext, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { makeApiRequest } from '@/utils/api';
 
 // Define types
 type User = {
@@ -60,7 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signIn = async (email: string, password: string) => {
     try {
       // Call the backend authentication API
-      const response = await fetch('http://127.0.0.1:8000/auth/login', {
+      const response = await makeApiRequest('/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -83,7 +84,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem('token', access_token);
 
       // Get user profile data
-      const profileResponse = await fetch('http://127.0.0.1:8000/user/profile', {
+      const profileResponse = await makeApiRequest('/user/profile', {
         headers: {
           'Authorization': `Bearer ${access_token}`
         }
@@ -123,7 +124,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const verifyToken = async (token: string): Promise<User> => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/user/profile', {
+      const response = await makeApiRequest('/user/profile', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
