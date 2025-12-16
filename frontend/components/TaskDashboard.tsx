@@ -18,9 +18,12 @@ export default function TaskDashboard() {
     fetchTasks();
   }, []);
 
-  const handleCreateTask = async (taskData: Omit<Task, 'id' | 'user_id' | 'created_at' | 'updated_at'>) => {
+  const handleCreateTask = async (data: { title: string; description?: string }) => {
     try {
-      await createTask(taskData);
+      await createTask({
+        ...data,
+        is_completed: false
+      });
       await fetchTasks();
       setShowForm(false);
     } catch (error) {
@@ -52,7 +55,7 @@ export default function TaskDashboard() {
       </div>
     </div>
   );
-  
+
   if (error) return (
     <div className="text-center py-10">
       <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-r from-rose-100 to-pink-100 flex items-center justify-center mb-4">
