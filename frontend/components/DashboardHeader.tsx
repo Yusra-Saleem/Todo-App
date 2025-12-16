@@ -55,7 +55,7 @@ export default function DashboardHeader({ onMenuClick }: { onMenuClick?: () => v
               >
                 <CheckSquare className="w-6 h-6 text-white" />
               </motion.div>
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <h1 className="text-2xl font-black bg-gradient-to-r from-rose-950 via-rose-800 to-rose-600 bg-clip-text text-transparent tracking-tight font-serif">
                   TaskZen
                 </h1>
@@ -68,7 +68,7 @@ export default function DashboardHeader({ onMenuClick }: { onMenuClick?: () => v
           </div>
 
           {/* Center Section - Date Display (Creative Element) */}
-          <div className="hidden md:flex items-center justify-center">
+          <div className="hidden lg:flex items-center justify-center">
             <div className="px-5 py-2 rounded-full bg-slate-50 border border-slate-100 text-slate-500 text-sm font-medium flex items-center gap-2 shadow-inner">
               <span className="w-2 h-2 rounded-full bg-rose-400/50" />
               {currentDate}
