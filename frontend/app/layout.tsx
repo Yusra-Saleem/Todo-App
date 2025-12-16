@@ -21,7 +21,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: 'TaskFlow - Productivity App',
+  title: 'TaskZen - Productivity App',
   description: 'A secure and modern task management application',
 }
 
