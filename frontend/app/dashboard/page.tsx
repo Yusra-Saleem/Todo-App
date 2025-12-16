@@ -131,21 +131,21 @@ function DashboardContent() {
         {/* Dashboard Header */}
         <DashboardHeader onMenuClick={() => setMobileMenuOpen(true)} />
 
-        <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <div className="max-w-7xl mx-auto p-4 sm:p-5 lg:p-6">
           {/* Welcome Header with Creative Design */}
-          <div className="mb-8 lg:mb-12">
-            <div className="relative mb-12 lg:mb-16">
+          <div className="mb-6 lg:mb-8">
+            <div className="relative mb-8 lg:mb-10">
               {/* Decorative Elements */}
               <div className="absolute -top-6 -left-6 w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-100 to-pink-100 rotate-12" />
               <div className="absolute -top-4 -right-4 w-10 h-10 rounded-xl bg-gradient-to-br from-amber-100 to-yellow-100 -rotate-12" />
 
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm rounded-2xl p-6 lg:p-8 border border-white/80 shadow-lg shadow-slate-200/50">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-gradient-to-r from-white/80 to-white/60 backdrop-blur-sm rounded-2xl p-5 lg:p-6 border border-white/80 shadow-lg shadow-slate-200/50">
                 <div className="relative z-10">
                   <div className="inline-flex items-center gap-2 bg-gradient-to-r from-rose-50 to-pink-50 px-4 py-2 rounded-full mb-3">
                     <Sparkles className="w-4 h-4 text-rose-700" />
                     <span className="text-sm font-bold text-rose-900 uppercase tracking-wider">Welcome Back</span>
                   </div>
-                  <h1 className="text-3xl lg:text-4xl font-black text-slate-900 mb-2">
+                  <h1 className="text-2xl lg:text-3xl font-black text-slate-900 mb-2">
                     Hello, <span className="bg-gradient-to-r from-rose-900 via-rose-600 to-rose-900 bg-clip-text text-transparent bg-300% animate-gradient">
                       {user?.email?.split('@')[0] || 'Creative'}
                     </span>!
@@ -155,10 +155,10 @@ function DashboardContent() {
 
                 <Button
                   onClick={() => setShowForm(true)}
-                  className="group relative overflow-hidden bg-gradient-to-r from-rose-900 to-rose-600 hover:from-rose-800 hover:to-rose-500 text-white shadow-xl hover:shadow-2xl hover:shadow-rose-900/30 transition-all duration-300 px-8 py-6 rounded-2xl font-bold text-lg"
+                  className="group relative overflow-hidden bg-gradient-to-r from-rose-900 to-rose-600 hover:from-rose-800 hover:to-rose-500 text-white shadow-xl hover:shadow-2xl hover:shadow-rose-900/30 transition-all duration-300 px-6 py-4 rounded-xl font-bold text-base"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                  <Plus className="mr-3 h-5 w-5" />
+                  <Plus className="mr-2 h-5 w-5" />
                   Create New Task
                 </Button>
               </div>
@@ -169,14 +169,14 @@ function DashboardContent() {
               {/* Total Tasks Card */}
               <div className="group relative overflow-hidden bg-gradient-to-br from-white to-white/90 rounded-2xl border border-white/80 shadow-lg shadow-slate-200/30 hover:shadow-xl hover:shadow-rose-200/20 transition-all duration-300">
                 <div className="absolute inset-0 bg-gradient-to-r from-rose-50/50 to-pink-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-rose-100 to-pink-100 flex items-center justify-center shadow-lg shadow-rose-900/10">
-                      <Target className="h-7 w-7 text-rose-700" />
+                <div className="relative p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-100 to-pink-100 flex items-center justify-center shadow-lg shadow-rose-900/10">
+                      <Target className="h-6 w-6 text-rose-700" />
                     </div>
                     <div className="text-right">
-                      <div className="text-xs font-bold text-rose-700 uppercase tracking-wider">Tasks</div>
-                      <div className="text-4xl font-black text-slate-900">{totalTasks}</div>
+                      <div className="text-[10px] font-bold text-rose-700 uppercase tracking-wider">Tasks</div>
+                      <div className="text-3xl font-black text-slate-900">{totalTasks}</div>
                     </div>
                   </div>
                   <div className="text-sm text-slate-600 font-medium">Active goals in progress</div>
@@ -189,14 +189,14 @@ function DashboardContent() {
               {/* Completed Tasks Card */}
               <div className="group relative overflow-hidden bg-gradient-to-br from-white to-white/90 rounded-2xl border border-white/80 shadow-lg shadow-slate-200/30 hover:shadow-xl hover:shadow-emerald-200/20 transition-all duration-300">
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-50/50 to-green-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-100 to-green-100 flex items-center justify-center shadow-lg shadow-emerald-900/10">
-                      <CheckCircle className="h-7 w-7 text-emerald-700" />
+                <div className="relative p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-100 to-green-100 flex items-center justify-center shadow-lg shadow-emerald-900/10">
+                      <CheckCircle className="h-6 w-6 text-emerald-700" />
                     </div>
                     <div className="text-right">
-                      <div className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Done</div>
-                      <div className="text-4xl font-black text-slate-900">{completedTasks}</div>
+                      <div className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Done</div>
+                      <div className="text-3xl font-black text-slate-900">{completedTasks}</div>
                     </div>
                   </div>
                   <div className="text-sm text-slate-600 font-medium">Successfully completed</div>
@@ -209,14 +209,14 @@ function DashboardContent() {
               {/* Pending Tasks Card */}
               <div className="group relative overflow-hidden bg-gradient-to-br from-white to-white/90 rounded-2xl border border-white/80 shadow-lg shadow-slate-200/30 hover:shadow-xl hover:shadow-amber-200/20 transition-all duration-300">
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-50/50 to-yellow-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-100 to-yellow-100 flex items-center justify-center shadow-lg shadow-amber-900/10">
-                      <Clock className="h-7 w-7 text-amber-700" />
+                <div className="relative p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-100 to-yellow-100 flex items-center justify-center shadow-lg shadow-amber-900/10">
+                      <Clock className="h-6 w-6 text-amber-700" />
                     </div>
                     <div className="text-right">
-                      <div className="text-xs font-bold text-amber-700 uppercase tracking-wider">Pending</div>
-                      <div className="text-4xl font-black text-slate-900">{pendingTasks}</div>
+                      <div className="text-[10px] font-bold text-amber-700 uppercase tracking-wider">Pending</div>
+                      <div className="text-3xl font-black text-slate-900">{pendingTasks}</div>
                     </div>
                   </div>
                   <div className="text-sm text-slate-600 font-medium">Awaiting your magic</div>
@@ -229,14 +229,14 @@ function DashboardContent() {
               {/* Productivity Card */}
               <div className="group relative overflow-hidden bg-gradient-to-br from-white to-white/90 rounded-2xl border border-white/80 shadow-lg shadow-slate-200/30 hover:shadow-xl hover:shadow-blue-200/20 transition-all duration-300">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-sky-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-100 to-sky-100 flex items-center justify-center shadow-lg shadow-blue-900/10">
-                      <TrendingUp className="h-7 w-7 text-blue-700" />
+                <div className="relative p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-sky-100 flex items-center justify-center shadow-lg shadow-blue-900/10">
+                      <TrendingUp className="h-6 w-6 text-blue-700" />
                     </div>
                     <div className="text-right">
-                      <div className="text-xs font-bold text-blue-700 uppercase tracking-wider">Productivity</div>
-                      <div className="text-4xl font-black text-slate-900">{completionRate}%</div>
+                      <div className="text-[10px] font-bold text-blue-700 uppercase tracking-wider">Productivity</div>
+                      <div className="text-3xl font-black text-slate-900">{completionRate}%</div>
                     </div>
                   </div>
                   <div className="text-sm text-slate-600 font-medium">Today's efficiency score</div>
@@ -266,11 +266,11 @@ function DashboardContent() {
                     <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-rose-100/50 to-pink-100/50 rounded-full -translate-x-16 -translate-y-16" />
                     <div className="relative bg-white/80 backdrop-blur-sm rounded-xl p-6">
                       <div className="flex items-center gap-3 mb-6">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-900 to-rose-600 flex items-center justify-center">
-                          <Sparkles className="h-6 w-6 text-white" />
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-900 to-rose-600 flex items-center justify-center">
+                          <Sparkles className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                          <h2 className="text-2xl font-black text-slate-900">Create New Magic</h2>
+                          <h2 className="text-xl font-black text-slate-900">Create New Magic</h2>
                           <p className="text-slate-600">Add a new task to your creative journey</p>
                         </div>
                       </div>
@@ -289,11 +289,11 @@ function DashboardContent() {
                     <div className="p-6 border-b border-slate-100">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-rose-50 to-pink-50 flex items-center justify-center">
+                          <div className="w-9 h-9 rounded-lg bg-gradient-to-r from-rose-50 to-pink-50 flex items-center justify-center">
                             <Brain className="h-5 w-5 text-rose-700" />
                           </div>
                           <div>
-                            <h2 className="text-xl font-black text-slate-900">Your Creative Tasks</h2>
+                            <h2 className="text-lg font-black text-slate-900">Your Creative Tasks</h2>
                             <p className="text-sm text-slate-600">{tasks.length} active items</p>
                           </div>
                         </div>
