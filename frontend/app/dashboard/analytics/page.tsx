@@ -75,7 +75,7 @@ function AnalyticsContent() {
     if (tasks.length > 0) {
       const totalTasks = tasks.length;
       const completedTasks = tasks.filter(task => task.is_completed).length;
-      const pendingTasks = tasks.filter(task => !task.is_completed && !task.is_deleted).length; // All non-completed, non-deleted tasks (including overdue)
+      const pendingTasks = tasks.filter(task => !task.is_completed).length; // All non-completed tasks
 
       const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
@@ -290,18 +290,14 @@ function AnalyticsContent() {
                             <h3 className={`text-xs font-medium truncate ${
                               task.is_completed
                                 ? 'text-emerald-700 line-through'
-                                : task.is_deleted
-                                ? 'text-slate-400 line-through'
                                 : 'text-slate-900'
                             }`}>
                               {task.title}
                             </h3>
                             <span className={`text-[8px] px-1.5 py-0.5 rounded-full ${
                               task.is_completed ? 'bg-emerald-100 text-emerald-800' :
-                              task.is_deleted ? 'bg-slate-100 text-slate-800' :
                               'bg-amber-100 text-amber-800'}`}>
                               {task.is_completed ? 'Completed' :
-                               task.is_deleted ? 'Deleted' :
                                'Pending'}
                             </span>
                           </div>
@@ -310,12 +306,6 @@ function AnalyticsContent() {
                               <div className="flex items-center gap-1">
                                 <Calendar className="w-2.5 h-2.5" />
                                 <span>{new Date(task.created_at).toLocaleDateString()}</span>
-                              </div>
-                            )}
-                            {task.due_date && !task.is_completed && !task.is_deleted && (
-                              <div className="flex items-center gap-1">
-                                <Clock className="w-2.5 h-2.5" />
-                                <span>{new Date(task.due_date).toLocaleDateString()}</span>
                               </div>
                             )}
                           </div>

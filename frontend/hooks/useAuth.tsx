@@ -9,6 +9,7 @@ import { makeApiRequest } from '@/utils/api';
 type User = {
   id: string;
   email: string;
+  name?: string; // Optional name field
   photoURL?: string;
 };
 
